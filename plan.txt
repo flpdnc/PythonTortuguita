@@ -1,0 +1,60 @@
+Plan the game:
+
+Define the game's core mechanics, such as movement, combat, and leveling: 
+Movement: I want movement and character controls to primarily be left-hand on the keyboard, wasd movement control, shift to run, ctrl to crouch, space to jump. Numbers 1-6 will be used as selectable items for the character.
+Combat: Combat will primarily be with a close-range weapon, swords, axes, and hammers. Combat will primarily be controlled with the right hand on the keyboard. The arrow direction keys will control the direction the player is attacking, independent of the movement. Arrows can be combined to attack in a diaganol direction.
+Leveling: Leveling will be done through experience. Each enemy killed will have an experience drop, porportional to the difficulty of the enemy. Leveling will get progressively more difficult as the player levels up, and each level will unlock an attribute and skill point to be used to improve the core mechanics of the player.
+
+Determine the game's theme, setting, and aesthetics:
+The game will be a top-down style game, with very simple shape sprites to start, later to be replaced with pixel art. The windowing system used to design the game should support both, and a 720p resolution. 
+
+Sketch out the game's user interface and controls.
+I outlined the primary controls in the core mechanics. The user interface should also be able to be navigated via the keyboard.
+
+Set up the development environment:
+
+Install Python (preferably the latest version) if you haven't already - Done.
+Choose a code editor or IDE that you're comfortable with - Vim
+Install necessary libraries:
+
+For this project, we'll use libtcod (also known as python-tcod) for its capabilities in handling roguelike game elements, such as map generation and pathfinding. Install it using pip: pip install tcod. - Done
+
+
+Create the basic game window and input handling system:
+
+Using libtcod, create a game window with customizable dimensions, font, and colors.
+Implement a basic input handling system to capture player actions, such as movement and menu navigation.
+
+
+
+
+
+Design the player control system:
+
+Create a class for the player character, which includes attributes like position, health, and inventory.
+Implement methods to handle player actions, such as moving, attacking, and using items.
+Develop the map generation system:
+
+Use libtcod's built-in map generation tools or create your custom algorithms to generate random, procedural maps.
+Implement a class for tiles, which includes information like whether they're walkable or transparent.
+Create a class for the game map, which stores tile data and handles map-related functions, such as field-of-view calculations and pathfinding.
+Implement game entities:
+
+Design classes for various game entities, such as monsters, items, and NPCs.
+Create a system to spawn and manage these entities on the game map.
+Develop the combat and leveling systems:
+
+Design a combat system that incorporates attributes like attack power, defense, and hit points.
+Implement a leveling system that rewards the player for defeating enemies and gaining experience points.
+Create the user interface:
+
+Design and implement UI elements like health bars, inventory screens, and message logs.
+Handle user input for navigating menus and using in-game actions.
+Polish and test the game:
+
+Add additional content like items, enemies, and special abilities.
+Thoroughly playtest the game, fix bugs, and optimize performance.
+Package and distribute the game:
+
+Create standalone executables for various platforms, if desired.
+Share your game with others, gather feedback, and make improvements.
