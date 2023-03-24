@@ -4,8 +4,8 @@ import tcod
 from color_palette import SolarizedDark
 from engine import Engine
 from entity import Entity
-from game_map import GameMap
 from input_handlers import EventHandler
+from procgen import generate_dungeon
 
 
 def main() -> None:
@@ -41,7 +41,7 @@ def main() -> None:
     )
     entities = {npc, player}
 
-    game_map = GameMap(MAP_WIDTH, MAP_HEIGHT)
+    game_map = generate_dungeon(MAP_WIDTH, MAP_HEIGHT)
 
     engine = Engine(entities=entities, event_handler=event_handler, game_map=game_map, player=player)
 
