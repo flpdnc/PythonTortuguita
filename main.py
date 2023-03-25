@@ -9,6 +9,7 @@ from procgen import generate_dungeon
 
 
 def main() -> None:
+    # Constants:
     SCREEN_WIDTH = 80
     SCREEN_HEIGHT = 50
 
@@ -18,8 +19,15 @@ def main() -> None:
     # Solarized-dark color theme
     BACKGROUND_COLOR = SolarizedDark.BASE02
     FOREGROUND_COLOR = SolarizedDark.BASE0
-    PLAYER_COLOR = FOREGROUND_COLOR
-    NPC_COLOR = SolarizedDark.GREEN
+    PLAYER_COLOR = SolarizedDark.BASE03
+    NPC_COLOR = SolarizedDark.BLUE
+
+    # Room constraints
+    ROOM_MAX_SIZE = 15
+    ROOM_MIN_SIZE = 6
+    MAX_ROOMS = 10
+
+    ########
 
     tileset = tcod.tileset.load_tilesheet(
         "dejavu10x10_gs_tc.png", 32, 8, tcod.tileset.CHARMAP_TCOD
@@ -41,7 +49,14 @@ def main() -> None:
     )
     entities = {npc, player}
 
-    game_map = generate_dungeon(MAP_WIDTH, MAP_HEIGHT)
+    game_map = generate_dungeon(
+        max_rooms=MAX_ROOMS,
+        room_min_size=ROOM_MIN_SIZE,
+        room_max_size=ROOM_MAX_SIZE,
+        map_width=MAP_WIDTH,
+        map_height=MAP_HEIGHT,
+        player=player
+    )
 
     engine = Engine(entities=entities, event_handler=event_handler, game_map=game_map, player=player)
 
