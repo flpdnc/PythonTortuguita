@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
+import copy
+
 import tcod
 
 from color_palette import SolarizedDark
 from engine import Engine
-from entity import Entity
+import entity_factories
 from input_handlers import EventHandler
 from procgen import generate_dungeon
 
@@ -27,6 +29,8 @@ def main() -> None:
     ROOM_MIN_SIZE = 6
     MAX_ROOMS = 10
 
+    MAX_MONSTERS_PER_ROOM = 2
+
     ########
 
     tileset = tcod.tileset.load_tilesheet(
@@ -35,19 +39,7 @@ def main() -> None:
 
     event_handler = EventHandler()
 
-    player = Entity(
-        x = int(SCREEN_WIDTH / 2),
-        y = int(SCREEN_HEIGHT / 2),
-        char = "@",
-        color = (PLAYER_COLOR)
-    )
-    npc = Entity(
-        x = int(SCREEN_WIDTH / 2 - 5),
-        y = int(SCREEN_HEIGHT / 2 - 3),
-        char = "@",
-        color = (NPC_COLOR)
-    )
-    entities = {npc, player}
+    player = copy.deepcopy(entity_factories.player)
 
     game_map = generate_dungeon(
         max_rooms=MAX_ROOMS,
@@ -55,10 +47,11 @@ def main() -> None:
         room_max_size=ROOM_MAX_SIZE,
         map_width=MAP_WIDTH,
         map_height=MAP_HEIGHT,
+        max_monsters_per_room=MAX_MONSTERS_PER_ROOM,
         player=player
     )
 
-    engine = Engine(entities=entities, event_handler=event_handler, game_map=game_map, player=player)
+    engine = Engine(event_handler=event_handler, game_map=game_map, player=player)
 
     with tcod.context.new_terminal(
         SCREEN_WIDTH,
