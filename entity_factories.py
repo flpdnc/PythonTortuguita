@@ -1,7 +1,28 @@
 from color_palette import SolarizedDark as sd
-from entity import Entity
+from components.ai import HostileEnemy
+from components.fighter import Fighter
+from entity import Actor
 
-player = Entity(char="@", color=sd.BASE3, name="Player", blocks_movement=True)
+player = Actor(
+    char="@", 
+    color=sd.BASE3, 
+    name="Player", 
+    ai_cls=HostileEnemy,
+    fighter = Fighter(hp=100, defense=2, power=5),
+)
 
-orc = Entity(char="o", color=sd.GREEN, name="Orc", blocks_movement=True)
-troll = Entity(char="T", color=sd.ORANGE, name="Troll", blocks_movement=True)
+orc = Actor(
+    char="o", 
+    color=sd.GREEN, 
+    name="Orc", 
+    ai_cls=HostileEnemy,
+    fighter=Fighter(hp=10, defense=0, power=3),
+)
+
+troll = Actor(
+    char="T", 
+    color=sd.ORANGE, 
+    name="Troll", 
+    ai_cls=HostileEnemy,
+    fighter=Fighter(hp=16, defense=1, power=4),
+)
