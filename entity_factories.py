@@ -8,7 +8,7 @@ player = Actor(
     color=sd.BASE3, 
     name="Player", 
     ai_cls=HostileEnemy,
-    fighter = Fighter(hp=100, defense=2, power=5),
+    fighter = Fighter(hp=10, defense=2, power=5),
 )
 
 orc = Actor(

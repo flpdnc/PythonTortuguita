@@ -3,6 +3,7 @@ import copy
 
 import tcod
 
+import color
 from color_palette import SolarizedDark
 from engine import Engine
 import entity_factories
@@ -15,7 +16,7 @@ def main() -> None:
     SCREEN_HEIGHT = 50
 
     MAP_WIDTH = 80
-    MAP_HEIGHT = 45
+    MAP_HEIGHT = 43
 
     # Solarized-dark color theme
     BACKGROUND_COLOR = SolarizedDark.BASE02
@@ -52,6 +53,10 @@ def main() -> None:
 
     engine.update_fov()
 
+    engine.message_log.add_message(
+            "Hello and welcome, adventurer, to yet another dungeon!", color.welcome_text
+        )
+
     with tcod.context.new_terminal(
         SCREEN_WIDTH,
         SCREEN_HEIGHT,
@@ -60,11 +65,12 @@ def main() -> None:
         vsync=True,
     ) as context:
         root_console = tcod.Console(SCREEN_WIDTH, SCREEN_HEIGHT, order="F")
-        root_console.clear(bg=BACKGROUND_COLOR)
         while True:
-            engine.render(console=root_console, context=context)
+            root_console.clear(bg=BACKGROUND_COLOR)
+            engine.event_handler.on_render(console=root_console)
+            context.present(root_console)
 
-            engine.event_handler.handle_events()
+            engine.event_handler.handle_events(context)
 
 if __name__ == "__main__":
     main()
