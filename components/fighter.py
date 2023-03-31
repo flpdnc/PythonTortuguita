@@ -12,7 +12,7 @@ if TYPE_CHECKING:
 
 
 class Fighter(BaseComponent):
-    entity: Actor
+    parent: Actor
 
     def __init__(self, hp: int, defense: int, power: int):
         self.max_hp = hp
@@ -27,21 +27,21 @@ class Fighter(BaseComponent):
     @hp.setter
     def hp(self, value: int) -> None:
         self._hp = max(0, min(value, self.max_hp))
-        if self._hp == 0 and self.entity.ai:
+        if self._hp == 0 and self.parent.ai:
             self.die()
 
     def die(self) -> None:
-        if self.engine.player is self.entity:
+        if self.engine.player is self.parent:
             death_message = "You died!"
             self.engine.event_handler = GameOverEventHandler(self.engine)
         else:
-            death_message = f"{self.entity.name} is dead!"
+            death_message = f"{self.parent.name} is dead!"
 
-        self.entity.char = "%"
-        self.entity.color = SolarizedDark.RED
-        self.entity.blocks_movement = False
-        self.entity.ai = None
-        self.entity.name = f"remains of {self.entity.name}"
-        self.entity.render_order = RenderOrder.CORPSE
+        self.parent.char = "%"
+        self.parent.color = SolarizedDark.RED
+        self.parent.blocks_movement = False
+        self.parent.ai = None
+        self.parent.name = f"remains of {self.parent.name}"
+        self.parent.render_order = RenderOrder.CORPSE
 
         print(death_message)
