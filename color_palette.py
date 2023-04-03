@@ -17,3 +17,5 @@ class SolarizedDark:
     BLUE = tcod.Color(38, 139, 210)
     CYAN = tcod.Color(42, 161, 152)
     GREEN = tcod.Color(133, 153, 0)
+    LIMEGREEN = tcod.Color(63, 255, 63)
+    GREY = tcod.Color(130, 112, 130)
